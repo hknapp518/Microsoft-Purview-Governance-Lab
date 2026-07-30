@@ -25,6 +25,7 @@ For the Knapp Healthcare engagement, DLP policies were implemented to protect he
 | Block PHI External Sharing | Sensitivity Label | Prevent external sharing of documents classified as Confidential – PHI Data |
 | Block PCI External Sharing | Sensitivity Label | Prevent external sharing of documents classified as Highly Confidential – PCI Data |
 | Protect Financial Records | Sensitive Information Types (SITs) | Detect and protect financial information including credit card numbers, bank accounts, IBANs, and SWIFT codes |
+<img width="1244" height="356" alt="image" src="https://github.com/user-attachments/assets/cbe0c684-8934-46e7-a8ea-6ab423609231" />
 
 ---
 
