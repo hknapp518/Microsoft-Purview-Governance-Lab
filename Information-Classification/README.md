@@ -19,6 +19,7 @@ The primary objectives of this phase were to:
 - Establish a scalable information protection framework.
 
 ---
+<img width="1453" height="717" alt="image" src="https://github.com/user-attachments/assets/e8c3c88e-1cb2-4de8-85c3-08e4484552e1" />
 
 ## Contents
 
