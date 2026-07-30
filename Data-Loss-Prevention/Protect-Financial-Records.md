@@ -21,7 +21,7 @@ To reduce organizational risk and support financial data protection requirements
 | Policy Name | Protect Financial Records |
 | Priority | 2 |
 | Locations | Exchange Online, SharePoint Online, OneDrive |
-| Detection Method | Built-in Sensitive Information Types |
+| Detection Method | Sensitive Information Types |
 | Mode | Simulation with Notifications |
 
 ### Sensitive Information Types
