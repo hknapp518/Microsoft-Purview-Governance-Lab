@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project demonstrates a hands-on implementation of **Microsoft Purview** within a simulated healthcare environment. Using a fictional organization, **Knapp Healthcare**, I implemented Microsoft Purview to classify sensitive information, automatically apply sensitivity labels, and prevent unauthorized sharing of regulated and proprietary data across Microsoft 365.
+This project demonstrates a hands-on implementation of Microsoft Purview within a simulated healthcare environment. Using a fictional organization, Knapp Healthcare, I implemented Microsoft Purview to classify sensitive information, automatically apply sensitivity labels, and prevent unauthorized sharing of regulated and proprietary data across Microsoft 365.
 
 ---
 
@@ -23,7 +23,7 @@ This project demonstrates a hands-on implementation of **Microsoft Purview** wit
 
 - Created and published Microsoft Purview Sensitivity Labels
 - Configured Built-in Sensitive Information Types
-- Developed a **Custom Sensitive Information Type** using Regular Expressions (Regex)
+- Developed a Custom Sensitive Information Type using Regular Expressions (Regex)
 - Implemented Auto-Labeling policies for:
   - Protected Health Information (PHI)
   - Personally Identifiable Information (PII)
@@ -51,11 +51,11 @@ Implemented Microsoft Purview DLP policies to:
 - Protect Financial Records
 - Protect Clinical Research Protocols
 
-Policies were deployed using **Simulation Mode** to validate detections before enforcement.
+Policies were deployed using Simulation Mode to validate detections before enforcement.
 
 ### Custom Detection
 
-Created a **Custom Sensitive Information Type** using a regular expression to detect proprietary clinical research protocol identifiers.
+Created a Custom Sensitive Information Type using a regular expression to detect proprietary clinical research protocol identifiers.
 
 Example:
 
