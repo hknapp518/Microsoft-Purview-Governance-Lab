@@ -1,56 +1,46 @@
-# Microsoft Purview Implementation for Knapp Healthcare
+# Microsoft Purview Governance Lab
 
 ## Project Overview
 
-This repository documents the design and implementation of a Microsoft Purview information protection solution for **Knapp Healthcare**, a fictional regional healthcare organization.
+This repository documents the design and implementation of a Microsoft Purview information protection solution for Knapp Healthcare, a fictional regional healthcare organization.
 
-The project is structured as a real-world consulting engagement, where I assume the role of a Microsoft Purview Analyst responsible for designing and documenting an enterprise information protection strategy.
+The project follows a real-world implementation methodology and demonstrates how Microsoft Purview can be used to classify, protect, and govern sensitive organizational data.
 
 ---
 
 ## Business Scenario
 
-Knapp Healthcare has experienced several data protection incidents involving sensitive employee, financial, and patient information.
+Knapp Healthcare has experienced several data protection incidents involving employee, financial, and patient information.
 
-Executive leadership has initiated a Microsoft Purview implementation to improve information governance, reduce data loss risk, and strengthen compliance with healthcare security requirements.
+Executive leadership has approved a Microsoft Purview implementation to improve information governance, reduce data loss, and strengthen regulatory compliance.
 
----
-
-## My Role
-
-As the Microsoft Purview Analyst, I am responsible for:
-
-- Gathering business requirements
-- Designing the information protection strategy
-- Creating sensitivity labels
-- Developing Data Loss Prevention (DLP) policies
-- Designing auto-labeling policies
-- Creating audit investigation procedures
-- Developing KQL queries for investigations
-- Documenting the complete governance solution
+As the Microsoft Purview Analyst, my responsibility is to design and document the organization's information protection strategy.
 
 ---
 
 ## Project Deliverables
 
 - Business Requirements
-- Solution Architecture
+- Data Inventory
 - Information Classification
 - Sensitivity Labels
-- Data Loss Prevention Policies
-- Auto-labeling Policies
-- Incident Response Playbooks
-- KQL Investigation Queries
+- Label Policies
+- Data Loss Prevention (DLP)
+- Auto-labeling
+- Incident Response
+- Kusto Query Language (KQL)
 - Supporting Documentation
+- Microsoft Purview Screenshots
 
 ---
 
-## Technologies
+## Microsoft Purview Technologies
 
-- Microsoft Purview
 - Microsoft Purview Information Protection
-- Microsoft Purview Data Loss Prevention
-- Microsoft 365
+- Sensitivity Labels
+- Label Policies
+- Data Loss Prevention (DLP)
+- Auto-labeling
 - Microsoft Purview Audit
 - Kusto Query Language (KQL)
 
@@ -58,4 +48,4 @@ As the Microsoft Purview Analyst, I am responsible for:
 
 ## Disclaimer
 
-This is a portfolio project based on a fictional organization. Knapp Healthcare is not a real customer and is used solely to demonstrate Microsoft Purview governance concepts and implementation practices.
+Knapp Healthcare is a fictional organization created for this portfolio project. The Microsoft Purview configurations, governance concepts, and implementation approach are based on hands-on experience and are presented as part of a realistic enterprise implementation scenario.
