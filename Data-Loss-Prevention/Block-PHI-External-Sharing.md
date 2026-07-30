@@ -34,7 +34,8 @@ Enabled
 
 The DLP policy detects documents that have been classified with the **Confidential – PHI Data** sensitivity label and prevents those files from being shared externally. By enforcing protection at the Microsoft 365 service level, the organization reduces the likelihood of accidental disclosure of regulated healthcare information.
 
-![Block PHI External Sharing Policy](Screenshots/block-phi-external-sharing-policy.png)
+<img width="598" height="809" alt="image" src="https://github.com/user-attachments/assets/30b6f809-441f-43a6-9a73-88e147b56a47" />
+
 
 ---
 
