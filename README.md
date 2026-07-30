@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This repository documents the design and partial implementation of a Microsoft Purview information governance solution for Knapp Healthcare, a fictional regional healthcare organization.
+This repository documents the design and implementation of a Microsoft Purview information governance solution for Knapp Healthcare, a fictional regional healthcare organization.
 
 The project follows a real-world implementation methodology and demonstrates how Microsoft Purview can be used to classify, protect, and govern sensitive organizational information.
 
