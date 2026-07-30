@@ -19,6 +19,7 @@ The following label policies are implemented as part of the Microsoft Purview de
 | Organization Label Policy | Enterprise-wide | Publishes the approved sensitivity label taxonomy across Microsoft 365 applications. |
 
 ---
+<img width="1593" height="611" alt="image" src="https://github.com/user-attachments/assets/f69eaa24-d892-41bd-bd27-0ec9badcdb9a" />
 
 ## Business Justification
 
