@@ -21,6 +21,7 @@ The taxonomy aligns business data with Microsoft Purview Information Protection 
 | Highly Confidential – PCI Data | Payment Card Industry (PCI) data requiring the highest level of protection. | Credit card numbers, payment transactions |
 
 ---
+<img width="1453" height="717" alt="image" src="https://github.com/user-attachments/assets/0122f8c9-df3d-4779-89e4-fec59b16f270" />
 
 ## Classification Principles
 
