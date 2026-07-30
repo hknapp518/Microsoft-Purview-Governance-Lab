@@ -1,32 +1,35 @@
-# Data Classification Matrix
+# Information Classification
 
 ## Overview
 
-Following the data discovery assessment, Knapp Healthcare identified several categories of business information requiring protection through Microsoft Purview.
+This section documents the information classification strategy developed for Knapp Healthcare.
 
-The following matrix maps business information to the Microsoft Purview sensitivity labels implemented as part of this project.
-
----
-
-| Business Information | Department | Microsoft Purview Sensitivity Label | Business Justification |
-|----------------------|------------|-------------------------------------|------------------------|
-| Public Website Content | Marketing | Public | Approved for public distribution |
-| Press Releases | Marketing | Information approved for public release | Reviewed and approved for external publication |
-| Employee Handbook | Human Resources | Internal information | Intended for internal employees only |
-| Employee Personnel Files | Human Resources | Personal (PII) | Contains personally identifiable information |
-| Payroll Reports | Human Resources | Confidential – Financial Data | Contains salary and compensation information |
-| Budget Reports | Finance | Confidential – Financial Data | Contains confidential financial information |
-| Patient Medical Records | Clinical Operations | Confidential – PHI Data | Contains Protected Health Information (PHI) |
-| Insurance Claims | Revenue Cycle | Confidential – PHI Data | Contains patient and insurance information |
-| Credit Card Payments | Patient Billing | Highly Confidential – PCI Data | Contains payment card information |
-| Vendor Contracts | Legal | Internal information | Internal business documentation |
+Following the business requirements assessment and data inventory, organizational data was analyzed and categorized based on its sensitivity, regulatory requirements, and business value. This classification strategy provides the foundation for Microsoft Purview Information Protection by determining how sensitive information should be identified, labeled, and protected.
 
 ---
 
-## Classification Strategy
+## Objectives
 
-Knapp Healthcare will classify information according to business impact, regulatory requirements, and the sensitivity of the data.
+The primary objectives of this phase were to:
 
-Microsoft Purview sensitivity labels provide consistent protection across Microsoft 365 by enabling document classification, encryption, and access controls where appropriate.
+- Identify and categorize sensitive organizational data.
+- Align business information with Microsoft Purview sensitivity labels.
+- Support regulatory compliance requirements.
+- Reduce the risk of unauthorized disclosure.
+- Establish a consistent enterprise-wide data classification standard.
 
-The classification matrix serves as the foundation for Data Loss Prevention (DLP), Auto-labeling, and Microsoft Purview Audit policies.
+---
+
+## Contents
+
+### Data Classification Matrix
+
+Maps Knapp Healthcare's business data to appropriate Microsoft Purview sensitivity labels based on confidentiality, regulatory requirements, and business impact.
+
+The matrix serves as the reference for implementing Microsoft Purview Information Protection policies throughout the organization.
+
+---
+
+## Outcome
+
+The information classification strategy provides a consistent framework for protecting healthcare, financial, and personally identifiable information. These classifications directly support the implementation of Microsoft Purview sensitivity labels, auto-labeling policies, and future Data Loss Prevention (DLP) controls.
