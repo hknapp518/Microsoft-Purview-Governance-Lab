@@ -1,9 +1,0 @@
-DLP Policy Propagation and Testing
-
-During enforcement testing, the Block PHI External Sharing policy was enabled, but an initial external-sharing test did not generate the expected DLP rule match.
-
-Investigation showed that the policy's Policy sync status was still Sync in progress, indicating that the updated configuration had not yet fully propagated across Microsoft 365 workloads.
-
-Key takeaway: After creating or modifying Microsoft Purview DLP policies, verify that Policy sync status = Sync completed before performing enforcement validation. Testing while synchronization is still in progress can produce inconsistent results and lead to incorrect conclusions about policy effectiveness.
-
-That's a good lesson learned because it shows a hiring manager you didn't just follow a tutorial—you tested a control, saw unexpected behavior, investigated the telemetry, identified the likely cause, and adjusted your validation methodology.
