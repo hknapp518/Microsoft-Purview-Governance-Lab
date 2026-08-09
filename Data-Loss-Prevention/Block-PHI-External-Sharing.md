@@ -40,8 +40,27 @@ The DLP policy detects documents that have been classified with the **Confidenti
 
 ---
 
-## Business Value
+## Validation Testing
 
-Healthcare organizations are responsible for protecting patient information under HIPAA and other privacy regulations. This policy helps ensure that PHI remains within approved organizational boundaries by automatically preventing external sharing of protected content.
+A controlled PHI test document was labeled **Confidential – PHI Data** and attached to an Exchange Online email addressed to an external recipient.
 
-Implementing DLP alongside Microsoft Purview sensitivity labels provides layered protection by combining data classification with automated enforcement across Microsoft 365 services.
+The DLP policy successfully detected the external sharing attempt and enforced the configured rule.
+
+### Enforcement Result
+
+- Activity: `DlpRuleMatch`
+- Location: Exchange
+- Policy: `Block PHI External Sharing`
+- Rule: `Block PHI Labeled Content External Sharing`
+- Sensitivity Label: `Confidential – PHI Data`
+- Actions: `BlockAccess`, `NotifyUser`, `GenerateAlert`
+- Result: External delivery blocked
+
+The sender received a policy notification confirming that the message was not delivered to the external recipient.
+
+### Defender Investigation
+
+The DLP match generated a Microsoft Defender alert categorized as **Exfiltration** and was automatically correlated into a Defender incident.
+
+The incident provided an investigation view connecting the user, DLP alert, activity, and protected email event.
+<img width="1875" height="896" alt="image" src="https://github.com/user-attachments/assets/d5681b34-9126-4ed7-b5a2-370c7efefe52" />
