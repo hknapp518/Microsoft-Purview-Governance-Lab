@@ -99,5 +99,9 @@ Advanced Hunting confirms that the blocked PHI external-sharing attempt generate
 
 The following SPL query was used to isolate Defender `AlertInfo` events received through Azure Event Hub:
 
+spl: index=purview sourcetype="mscs:azure:eventhub" category="AdvancedHunting-AlertInfo"
+
+| table _time properties.Title properties.Category properties.Severity properties.ServiceSource properties.DetectionSource properties.AlertId
+
 <img width="1844" height="853" alt="image" src="https://github.com/user-attachments/assets/1af1bcd7-df5d-423d-bc4d-90e52fa7f34f" />
 
