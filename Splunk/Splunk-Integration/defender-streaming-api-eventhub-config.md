@@ -1,2 +1,3 @@
-<img width="1871" height="877" alt="image" src="https://github.com/user-attachments/assets/93659342-6f27-4133-b8f1-41bb52f827a1" />
-Figure: Microsoft Defender XDR Streaming API successfully configured to forward security telemetry to the purview-defender-events Azure Event Hub for downstream ingestion into Splunk.
+<img width="634" height="645" alt="image" src="https://github.com/user-attachments/assets/ec0ac14e-fbc1-40b5-8d0d-68dcd4b2f1f9" />
+
+Figure: Microsoft Defender XDR Streaming API configured to forward AlertInfo and AlertEvidence telemetry to the purview-defender-events Azure Event Hub for downstream Splunk ingestion.
