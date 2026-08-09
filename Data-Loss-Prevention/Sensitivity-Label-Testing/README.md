@@ -5,5 +5,6 @@ The **Confidential – PHI Data** sensitivity label was automatically applied to
 This demonstrates how sensitivity labels can propagate from protected attachments to email messages while DLP independently evaluates the attempted external sharing activity.
 
 <img width="1221" height="641" alt="image" src="https://github.com/user-attachments/assets/317085c9-30dc-4632-b46f-66db429ceed7" />
+<img width="834" height="281" alt="image" src="https://github.com/user-attachments/assets/7fab6d58-6974-48fc-949f-489b76ae7edb" />
 
 
