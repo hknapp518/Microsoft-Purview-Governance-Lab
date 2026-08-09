@@ -64,3 +64,4 @@ The DLP match generated a Microsoft Defender alert categorized as **Exfiltration
 
 The incident provided an investigation view connecting the user, DLP alert, activity, and protected email event.
 <img width="1875" height="896" alt="image" src="https://github.com/user-attachments/assets/d5681b34-9126-4ed7-b5a2-370c7efefe52" />
+Figure: Microsoft Defender incident automatically generated from the Purview DLP policy match, showing the correlated user, alert, activity, and Exfiltration classification.
