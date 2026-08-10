@@ -62,7 +62,7 @@ The custom SIT was configured with:
 - **Character proximity:** 300 characters
 - **Match type:** Word match
 
-The identifier and supporting terminology must occur within 300 characters of each other. This adds contextual evidence to the structured identifier and helps reduce false-positive detections.
+The identifier and supporting terminology must occur within 300 characters of each other. This adds contextual evidence to the structured identifier and helps reduce false positive detections.
 
 ---
 
