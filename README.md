@@ -2,239 +2,69 @@
 
 ## Overview
 
-This project demonstrates the design and implementation of an enterprise-style data security and governance environment using Microsoft Purview.
+An enterprise style Microsoft Purview lab demonstrating how sensitive data can be identified, protected, monitored, and investigated across Microsoft 365 and Splunk.
 
-Using a fictional healthcare organization, **Knapp Healthcare**, I built and tested controls designed to identify sensitive information, classify protected data, prevent unauthorized external sharing, generate security alerts, and forward DLP telemetry into Splunk for centralized security monitoring.
-
-The project progresses from data classification and sensitivity labeling through DLP enforcement and ultimately into an automated SIEM monitoring pipeline.
-
----
+The project uses fictional healthcare and critical-infrastructure scenarios to build and validate data protection controls from classification through SIEM monitoring.
 
 ## Architecture
 
-**Sensitive Data → Microsoft Purview → Sensitivity Labels → DLP Enforcement → Microsoft Defender XDR → Azure Event Hub → Splunk Enterprise**
+**Sensitive Data → Microsoft Purview → DLP Enforcement → Microsoft Defender XDR → Azure Event Hub → Splunk**
 
----
+## What I Built
+
+### Information Protection
+- Sensitivity label taxonomy for PHI, PCI, financial, and internal data
+- Custom Sensitive Information Types using regex and contextual evidence
+- Custom BCSI classifier for a NERC CIP-inspired information protection scenario
+- Auto-labeling and classification testing
+
+### Data Loss Prevention
+- PHI external-sharing protection
+- PCI external-sharing protection
+- Financial data protection
+- Custom clinical research identifier protection
+- BCSI external-sharing enforcement
+- Simulation, policy tips, blocking, and alert generation
+
+### Security Monitoring & SIEM Integration
+- Validated DLP alerts in Microsoft Defender XDR
+- Investigated security telemetry using KQL
+- Streamed Defender telemetry through Azure Event Hub
+- Ingested and investigated DLP events in Splunk using SPL
+
+## Featured End-to-End Test: BCSI External Sharing
+
+A custom Sensitive Information Type was created to identify a fictional BES Cyber System Information (BCSI) identifier using regex, supporting keywords, and proximity-based matching.
+
+The classifier was connected to a DLP policy designed to prevent BCSI from being shared externally.
+
+The final test successfully demonstrated:
+
+**Custom BCSI SIT → High-Confidence Detection → External Sharing Attempt → Message Blocked → Defender Alert → Azure Event Hub → Splunk**
+
+This demonstrates how organization-specific data classification can be connected to prevention and downstream SOC monitoring.
 
 ## Technologies
 
-- Microsoft Purview
-- Microsoft Defender XDR
-- Microsoft 365
-- Microsoft Exchange Online
-- Microsoft SharePoint Online
-- Microsoft OneDrive
-- Microsoft Entra ID
-- Azure Event Hubs
-- Defender XDR Streaming API
-- Splunk Enterprise
-- Splunk Add-on for Microsoft Cloud Services
-- KQL / Advanced Hunting
-- SPL
-- Regular Expressions (Regex)
+`Microsoft Purview` · `Defender XDR` · `Microsoft 365` · `Entra ID` · `Azure Event Hubs` · `Splunk Enterprise` · `KQL` · `SPL` · `Regex`
 
----
+## Repository
 
-# Project Components
+- **Information-Protection/** — Sensitivity labels, custom SITs, and classification
+- **Data-Loss-Prevention/** — DLP policies, enforcement testing, and investigations
+- **Event-Hub-Splunk-Integration/** — Defender-to-Splunk architecture and validation
+- **Lessons-Learned/** — Key technical and operational takeaways
 
-## 1. Information Classification
+## Key Takeaway
 
-Implemented Microsoft Purview data classification using built-in and custom Sensitive Information Types.
+The project demonstrates a complete data-security workflow:
 
-Classification scenarios included:
+**Identify → Classify → Protect → Alert → Stream → Investigate**
 
-- Protected Health Information (PHI)
-- Personally Identifiable Information (PII)
-- Financial information
-- Payment Card Information (PCI)
-- Proprietary clinical research identifiers
-
-A Custom Sensitive Information Type was developed using regular expressions to detect organization-specific clinical protocol identifiers.
-
-Example:
-
-`KNAPP-PROT-2026-001`
-
-This demonstrates extending Purview beyond Microsoft's built-in detection capabilities to protect organization-specific sensitive information.
-
----
-
-## 2. Sensitivity Labels
-
-Created and published an enterprise-style sensitivity label taxonomy including:
-
-- Public
-- Internal Information
-- Information Approved for Public Release
-- Personal (PII)
-- Confidential – Financial Data
-- Confidential – PHI Data
-- Highly Confidential – PCI Data
-
-Testing demonstrated sensitivity label inheritance from protected attachments to Outlook email messages.
-
----
-
-## 3. Data Loss Prevention
-
-Implemented Microsoft Purview DLP policies for:
-
-- PHI external sharing
-- PCI external sharing
-- Financial records
-- Proprietary clinical research protocols
-
-Policies were initially evaluated using **Simulation Mode** before moving selected controls into enforcement.
-
-A controlled PHI external-sharing test demonstrated:
-
-**Sensitivity Label Detected → External Recipient Identified → DLP Policy Match → Message Blocked → User Notified → Security Alert Generated**
-
-The enforced rule performed:
-
-- `BlockAccess`
-- `NotifyUser`
-- `GenerateAlert`
-
-This prevented simulated PHI from being transmitted outside the organization.
-
----
-
-## 4. Defender XDR Security Monitoring
-
-Microsoft Defender XDR was used to validate DLP security alerts generated by Microsoft Purview.
-
-Advanced Hunting confirmed that DLP violations generated `AlertInfo` and `AlertEvidence` telemetry.
-
-The PHI external-sharing violation was categorized as:
-
-**Category:** Exfiltration  
-**Detection Source:** Microsoft Data Loss Prevention
-
-KQL was used to investigate and validate the generated security telemetry.
-
----
-
-## 5. Azure Event Hub Integration
-
-Microsoft Defender XDR Streaming API was configured to automatically export:
-
-- `AlertInfo`
-- `AlertEvidence`
-
-An Azure Event Hubs namespace and dedicated Event Hub were deployed as the streaming layer between Defender XDR and Splunk.
-
-A dedicated Microsoft Entra application was created for Splunk authentication.
-
-The Splunk service principal was assigned the:
-
-**Azure Event Hubs Data Receiver**
-
-RBAC role to provide least-privilege access to security telemetry.
-
----
-
-## 6. Splunk SIEM Integration
-
-The Splunk Add-on for Microsoft Cloud Services was configured to consume Microsoft Defender XDR telemetry from Azure Event Hubs.
-
-Events are automatically ingested into:
-
-**Index:** `purview`  
-**Sourcetype:** `mscs:azure:eventhub`
-
-A controlled DLP violation was successfully traced through the complete pipeline:
-
-**Microsoft Purview → Defender XDR → Streaming API → Azure Event Hub → Splunk**
-
-The corresponding DLP `AlertInfo` event was successfully identified in Splunk using SPL.
-
-This replaced the initial manual CSV-based testing with automated security telemetry ingestion.
-
-➡️ See the [Event Hub → Splunk Integration](Event-Hub-Splunk-Integration/) for configuration and validation evidence.
-
----
-
-# End-to-End Validation
-
-The final controlled test used fictitious clinical data representing protected health information.
-
-A PHI-labeled document was attached to an email addressed to an external recipient.
-
-Microsoft Purview:
-
-1. Identified the sensitivity classification.
-2. Applied the appropriate sensitivity label to the email.
-3. Detected the external-sharing condition.
-4. Blocked the transmission.
-5. Notified the user.
-6. Generated a DLP security alert.
-
-Microsoft Defender XDR recorded the violation as security telemetry.
-
-The Defender Streaming API forwarded the event to Azure Event Hubs.
-
-Splunk automatically consumed the Event Hub telemetry and made the DLP alert available for SIEM investigation.
-
-### Validated Pipeline
-
-**Sensitive PHI Data**  
-↓  
-**Microsoft Purview Sensitivity Label**  
-↓  
-**DLP Enforcement**  
-↓  
-**Microsoft Defender XDR Alert**  
-↓  
-**Azure Event Hub**  
-↓  
-**Splunk Enterprise**
-
----
-
-# Skills Demonstrated
-
-- Microsoft Purview
-- Data Loss Prevention (DLP)
-- Information Protection
-- Sensitivity Labels
-- Sensitive Information Types
-- Custom Sensitive Information Types
-- Regular Expressions
-- Microsoft Defender XDR
-- Advanced Hunting / KQL
-- Azure Event Hubs
-- Microsoft Entra ID
-- Azure RBAC
-- Service Principal Authentication
-- Defender XDR Streaming API
-- Splunk Enterprise
-- SPL
-- SIEM Integration
-- Security Telemetry Engineering
-- Data Classification
-- Data Exfiltration Prevention
-- HIPAA Security Concepts
-- PCI Data Protection
-- Security Control Testing
-- Troubleshooting and Validation
-
----
-
-# Project Status
-
-**Core security architecture: Complete**
-
-The project successfully demonstrates data classification, sensitivity labeling, DLP enforcement, Defender XDR alert generation, Azure Event Hub streaming, and automated Splunk SIEM ingestion.
-
-Final portfolio enhancements include security monitoring dashboards, architecture visualization, and project documentation refinement.
-
----
+Rather than treating Microsoft Purview as an isolated compliance tool, the lab connects information protection and DLP controls directly to security operations and SIEM monitoring.
 
 ## Disclaimer
 
-This project was created for educational and portfolio purposes.
+This project was created for educational and portfolio purposes. All organizations, users, identifiers, sensitive data, and security events used in testing are fictional.
 
-All users, patient information, clinical data, protocol identifiers, organizations, and security events used in testing are fictional.
-
-**Knapp Healthcare** is a fictional organization created solely to demonstrate Microsoft Purview information protection, DLP, security monitoring, and SIEM integration capabilities.
+The BCSI scenario is a NERC CIP-inspired lab use case and does not represent or claim compliance with a specific NERC CIP requirement.
