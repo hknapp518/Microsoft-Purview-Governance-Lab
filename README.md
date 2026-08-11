@@ -2,9 +2,9 @@
 
 ## Overview
 
-A Microsoft Purview project demonstrating how sensitive data can be identified, protected, monitored, and investigated across Microsoft 365 and Splunk.
+A Microsoft Purview project focused on identifying, protecting, monitoring, and investigating sensitive data across Microsoft 365.
 
-The project uses fictional healthcare and critical-infrastructure scenarios to build and validate data protection controls from classification through SIEM monitoring.
+The project uses fictional healthcare and critical-infrastructure scenarios to test data classification, DLP enforcement, security alerting, and SIEM monitoring.
 
 ## Architecture
 
@@ -13,36 +13,34 @@ The project uses fictional healthcare and critical-infrastructure scenarios to b
 ## What I Built
 
 ### Information Protection
-- Sensitivity label taxonomy for PHI, PCI, financial, and internal data
+- Sensitivity labels for PHI, PCI, financial, and internal data
 - Custom Sensitive Information Types using regex and contextual evidence
-- Custom BCSI classifier for a NERC CIP-inspired information protection scenario
 - Auto-labeling and classification testing
+- Custom BCSI classifier for a NERC CIP-inspired scenario
 
 ### Data Loss Prevention
 - PHI external-sharing protection
 - PCI external-sharing protection
 - Financial data protection
-- Custom clinical research identifier protection
+- Clinical research identifier protection
 - BCSI external-sharing enforcement
 - Simulation, policy tips, blocking, and alert generation
 
-### Security Monitoring & SIEM Integration
-- Validated DLP alerts in Microsoft Defender XDR
+### Security Monitoring
+- Validated DLP events in Microsoft Defender XDR
 - Investigated security telemetry using KQL
-- Streamed Defender telemetry through Azure Event Hub
+- Streamed Defender telemetry through Azure Event Hubs
 - Ingested and investigated DLP events in Splunk using SPL
 
-## Featured End-to-End Test: BCSI External Sharing
+## Featured Test: BCSI External Sharing
 
-A custom Sensitive Information Type was created to identify a fictional BES Cyber System Information (BCSI) identifier using regex, supporting keywords, and proximity-based matching.
+For the final use case, I created a custom Sensitive Information Type to identify a fictional BES Cyber System Information (BCSI) identifier using regex and contextual evidence.
 
-The classifier was connected to a DLP policy designed to prevent BCSI from being shared externally.
+The classifier was connected to a DLP policy designed to prevent the information from being shared externally.
 
-The final test successfully demonstrated:
+The final test demonstrated:
 
-**Custom BCSI SIT → High-Confidence Detection → External Sharing Attempt → Message Blocked → Defender Alert → Azure Event Hubs → Splunk**
-
-This demonstrates how organization-specific data classification can be connected to prevention and downstream SOC monitoring.
+**Custom BCSI SIT → Detection → External Sharing Attempt → Message Blocked → Defender XDR → Azure Event Hubs → Splunk**
 
 ## Technologies
 
@@ -52,19 +50,16 @@ This demonstrates how organization-specific data classification can be connected
 
 - **Information-Protection/** — Sensitivity labels, custom SITs, and classification
 - **Data-Loss-Prevention/** — DLP policies, enforcement testing, and investigations
-- **Event-Hub-Splunk-Integration/** — Defender-to-Splunk architecture and validation
-- **Lessons-Learned/** — Key technical and operational takeaways
+- **Event-Hub-Splunk-Integration/** — Defender-to-Splunk integration and validation
+- **Lessons-Learned/** — Technical and operational takeaways
 
 ## Key Takeaway
 
-The project demonstrates a complete data-security workflow:
-
-**Identify → Classify → Protect → Alert → Stream → Investigate**
-
-Rather than treating Microsoft Purview as an isolated compliance tool, the lab connects information protection and DLP controls directly to security operations and SIEM monitoring.
+Building the policy is only the beginning.
+Effective data protection requires continuous testing, tuning, reducing false positives, validating enforcement, and ensuring the resulting security telemetry reaches the teams responsible for investigation.
 
 ## Disclaimer
 
-This project was created for educational and portfolio purposes. All organizations, users, identifiers, sensitive data, and security events used in testing are fictional.
+This project was created for educational and portfolio purposes. All organizations, users, identifiers, sensitive data, and security events used for testing are fictional.
 
-The BCSI scenario is a NERC CIP-inspired lab use case and does not represent or claim compliance with a specific NERC CIP requirement.
+The BCSI scenario is NERC CIP-inspired and does not represent or claim compliance with a specific NERC CIP requirement.
