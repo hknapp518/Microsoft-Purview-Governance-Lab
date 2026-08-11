@@ -2,66 +2,43 @@
 
 ## Overview
 
-To reduce the risk of unauthorized disclosure of Protected Health Information (PHI), a Microsoft Purview Data Loss Prevention (DLP) policy was implemented to prevent externally sharing content classified as **Confidential – PHI Data**.
+This DLP policy was created to prevent external sharing of content classified with the **Confidential – PHI Data** sensitivity label.
 
-The policy monitors Exchange Online, SharePoint Online, and OneDrive to ensure that sensitive healthcare information remains within the organization.
-
----
+The policy protects sensitive healthcare information across supported Microsoft 365 locations.
 
 ## Policy Configuration
 
-**Policy Name**
+| Setting | Configuration |
+| --- | --- |
+| Policy Name | Block PHI External Sharing |
+| Protected Label | Confidential – PHI Data |
+| Locations | Exchange Online, SharePoint Online, OneDrive |
+| Policy Mode | Enabled |
 
-Block PHI External Sharing
+## Policy Logic
 
-**Protected Label**
+The policy detects content classified with the **Confidential – PHI Data** sensitivity label and applies restrictions when that content is shared outside the organization.
 
-Confidential – PHI Data
+This connects sensitivity labeling with DLP enforcement so classification can drive data-protection controls across Microsoft 365.
 
-**Protected Locations**
+## Validation
 
-- Exchange Online
-- SharePoint Online
-- OneDrive
+The policy was tested using fictional healthcare data in a controlled external-sharing scenario.
 
-**Policy Mode**
+Testing confirmed that the PHI sensitivity label could be used by the DLP policy to identify protected content and enforce the configured external-sharing restriction.
 
-Enabled
+**PHI Sensitivity Label → External Sharing Condition → DLP Match → Protection**
 
----
+## Key Takeaway
 
-## Implementation
+Sensitivity labels can provide classification context that DLP policies use to enforce protection consistently across Microsoft 365.
 
-The DLP policy detects documents that have been classified with the **Confidential – PHI Data** sensitivity label and prevents those files from being shared externally. By enforcing protection at the Microsoft 365 service level, the organization reduces the likelihood of accidental disclosure of regulated healthcare information.
+## Disclaimer
+
+All healthcare information, users, recipients, and organizations used in this scenario are fictional and were created solely for lab testing.
 
 <img width="598" height="809" alt="image" src="https://github.com/user-attachments/assets/30b6f809-441f-43a6-9a73-88e147b56a47" />
 <img width="1227" height="713" alt="image" src="https://github.com/user-attachments/assets/1fc7e6b9-60af-4df3-b782-1196f44a3667" />
 
-
----
-
-## Validation Testing
-
-A controlled PHI test document was labeled **Confidential – PHI Data** and attached to an Exchange Online email addressed to an external recipient.
-
-The DLP policy successfully detected the external sharing attempt and enforced the configured rule.
-
-### Enforcement Result
-
-- Activity: `DlpRuleMatch`
-- Location: Exchange
-- Policy: `Block PHI External Sharing`
-- Rule: `Block PHI Labeled Content External Sharing`
-- Sensitivity Label: `Confidential – PHI Data`
-- Actions: `BlockAccess`, `NotifyUser`, `GenerateAlert`
-- Result: External delivery blocked
-
-The sender received a policy notification confirming that the message was not delivered to the external recipient.
-
-### Defender Investigation
-
-The DLP match generated a Microsoft Defender alert categorized as **Exfiltration** and was automatically correlated into a Defender incident.
-
-The incident provided an investigation view connecting the user, DLP alert, activity, and protected email event.
 <img width="1875" height="896" alt="image" src="https://github.com/user-attachments/assets/d5681b34-9126-4ed7-b5a2-370c7efefe52" />
 Figure: Microsoft Defender incident automatically generated from the Purview DLP policy match, showing the correlated user, alert, activity, and Exfiltration classification.
