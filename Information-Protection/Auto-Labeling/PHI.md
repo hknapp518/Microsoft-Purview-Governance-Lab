@@ -1,33 +1,19 @@
-# Auto-Label PHI
+# PHI Auto-Labeling
 
 ## Overview
 
-The **Auto-Label PHI** policy automatically identifies protected health information (PHI) within Microsoft 365 content and applies the **Confidential – PHI Data** sensitivity label.
+This auto-labeling policy demonstrates how Microsoft Purview can automatically classify healthcare-related information using built-in Sensitive Information Types.
 
-Rather than relying on users to manually classify documents, Microsoft Purview inspects content for healthcare-related Sensitive Information Types (SITs) and automatically classifies qualifying files and emails.
-
-This automated classification serves as the foundation for downstream Information Protection and Data Loss Prevention (DLP) policies.
-
----
-
-## Business Scenario
-
-Following a governance assessment at Knapp Healthcare, it was determined that employees were manually handling documents containing protected health information. This created the risk of inconsistent classification and accidental disclosure.
-
-To improve consistency and reduce reliance on manual labeling, an Auto-Labeling policy was implemented to automatically classify healthcare-related content whenever regulated information was detected.
-
----
+The policy evaluates supported Microsoft 365 content and applies the **Confidential – PHI Data** sensitivity label when configured detection criteria are met.
 
 ## Policy Configuration
 
-| Setting | Value |
-|---------|-------|
+| Setting | Configuration |
+| --- | --- |
 | Policy Name | Auto-Label PHI |
 | Label Applied | Confidential – PHI Data |
-| Mode | On |
 | Locations | Exchange Online, SharePoint Online, OneDrive |
-
----
+| Policy Mode | On |
 
 ## Detection Criteria
 
@@ -40,25 +26,21 @@ The policy uses Microsoft Purview built-in Sensitive Information Types including
 - U.S. Individual Taxpayer Identification Number (ITIN)
 - U.S. Social Security Number (SSN)
 
-When one or more configured Sensitive Information Types are detected, Microsoft Purview automatically applies the **Confidential – PHI Data** sensitivity label.
+When the configured conditions are met, Microsoft Purview automatically applies the **Confidential – PHI Data** sensitivity label.
 
----
+## Protection Flow
 
-## Integration with DLP
+**Healthcare Data → Sensitive Information Type Detection → Auto-Labeling Policy → Confidential – PHI Data → DLP**
 
-Once the sensitivity label has been automatically applied, downstream Microsoft Purview DLP policies use the label as a condition to:
+The applied sensitivity label can then be used as a condition by downstream DLP policies to apply additional data-protection controls.
 
-- Block unauthorized external sharing
-- Protect healthcare information stored in Microsoft 365
-- Generate audit events
-- Notify users of policy violations
+## Key Takeaway
 
-This approach separates **classification** from **enforcement**, making security controls easier to manage and maintain.
+Auto-labeling provides consistent classification without relying entirely on users to recognize and manually label sensitive information.
 
----
+Separating classification from enforcement also allows sensitivity labels to be reused across multiple data-protection policies.
 
-## Business Value
+## Disclaimer
 
-Automatically classifying protected health information improves data governance by ensuring sensitive healthcare records receive consistent protection regardless of who creates or stores the content.
-
-By combining Auto-Labeling with Microsoft Purview DLP, Knapp Healthcare reduced the likelihood of human error while strengthening HIPAA compliance and improving the organization's overall data protection posture.<img width="588" height="836" alt="image" src="https://github.com/user-attachments/assets/64e4d0a0-9592-462b-870c-90d58c3e378a" />
+All healthcare information, users, and organizations used for testing were fictional and created solely for this lab. This project demonstrates technical Microsoft Purview capabilities and does not represent or claim HIPAA compliance.
+<img width="588" height="836" alt="image" src="https://github.com/user-attachments/assets/64e4d0a0-9592-462b-870c-90d58c3e378a" />
