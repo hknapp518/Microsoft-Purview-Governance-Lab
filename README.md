@@ -2,7 +2,7 @@
 
 ## Overview
 
-A Microsoft Purview project focused on identifying, protecting, monitoring, and investigating sensitive data across Microsoft 365.
+Microsoft Purview data security lab demonstrating classification, DLP enforcement, Defender XDR monitoring, and Splunk integration.
 
 The project uses fictional healthcare and critical-infrastructure scenarios to test data classification, DLP enforcement, security alerting, and SIEM monitoring.
 
