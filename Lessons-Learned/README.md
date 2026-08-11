@@ -1,6 +1,6 @@
 # Lessons Learned
 
-This project provided hands-on experience designing, testing, troubleshooting, and monitoring Microsoft Purview data protection controls in a Microsoft 365 lab environment.
+This project provided experience designing, testing, troubleshooting, and monitoring Microsoft Purview data protection controls in a Microsoft 365 lab environment.
 
 Rather than focusing only on successful configurations, several of the most valuable lessons came from troubleshooting unexpected behavior and validating how different Microsoft security services interact.
 
