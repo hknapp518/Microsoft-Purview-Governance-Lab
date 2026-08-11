@@ -1,98 +1,63 @@
-# BES Cyber System Information (BCSI) Custom Sensitive Information Type
+# BES Cyber System Information (BCSI) Identifier
 
 ## Overview
 
-A custom Microsoft Purview Sensitive Information Type (SIT) was created to identify organization-specific information associated with BES Cyber System Information (BCSI).
+This Custom Sensitive Information Type (SIT) was created to detect fictional BES Cyber System Information (BCSI) identifiers in Microsoft 365 content.
 
-The classifier demonstrates how Microsoft Purview can use custom regular expressions and contextual evidence to identify sensitive information that is not covered by a built-in Sensitive Information Type.
+The classifier supports a NERC CIP-inspired lab scenario focused on identifying and protecting organization-specific sensitive information.
 
-> **Lab Note:** The BCSI identifier format used in this project is fictional and was created solely for security testing. It is not an identifier format prescribed by NERC.
+## Detection Logic
 
----
+The custom SIT combines a regular expression with supporting contextual evidence.
 
-## Detection Pattern
+### Primary Pattern
 
-The custom SIT detects identifiers using the following lab format:
+```regex
+BES-BCSI-\d{4}-\d{4}
+```
 
-`BES-BCSI-YYYY-NNNN`
+Example test identifier:
 
-Example:
-
-`BES-BCSI-2026-0001`
-
-### Primary Element
-
-**Regex ID:** `BES_BCSI_Identifier_Regex`
-
-**Regular Expression:**
-
-`(?:^|\s)(BES-BCSI-\d{4}-\d{4})(?:$|\s)`
-
-The regular expression identifies the structured BCSI identifier used throughout the lab.
-
+```text
+BES-BCSI-2026-0001
+```
 <img width="635" height="777" alt="image" src="https://github.com/user-attachments/assets/8296e057-6542-46b1-bc33-62666b0feb1c" />
+### Supporting Evidence
 
+Contextual keywords were added to increase detection confidence and reduce matches based solely on the identifier pattern.
 
----
-
-## Supporting Evidence
-
-A supporting keyword list named `BCSI_Supporting_Keywords` was added to provide contextual validation.
-
-Keywords include:
+Examples include terms associated with the fictional BCSI scenario, such as:
 
 - BES Cyber System Information
-- BES Cyber System
 - BCSI
-- Bulk Electric System
-- Electronic Security Perimeter
 - Control Center
-- Substation
-- NERC CIP
+- Network Configuration
+- Security Configuration
 
----
+## Detection Approach
 
-## Detection Configuration
+**Regex Pattern + Contextual Evidence → Custom SIT Match**
 
-The custom SIT was configured with:
-
-- **Confidence level:** High
-- **Primary element:** `BES_BCSI_Identifier_Regex`
-- **Supporting element:** `BCSI_Supporting_Keywords`
-- **Character proximity:** 300 characters
-- **Match type:** Word match
-
-The identifier and supporting terminology must occur within 300 characters of each other. This adds contextual evidence to the structured identifier and helps reduce false positive detections.
-
----
-
-## Validation
-
-A controlled test document containing the following fictional data was uploaded to the Microsoft Purview Sensitive Information Type testing interface:
-
-`BES-BCSI-2026-0001`
-
-The document also contained supporting terminology including **BCSI**, **BES Cyber System**, and **Control Center**.
-
-Microsoft Purview successfully identified the custom BCSI identifier and produced a **High-confidence match**, validating the regex and supporting keyword detection logic.
-
-<img width="637" height="731" alt="image" src="https://github.com/user-attachments/assets/9b880b38-6348-4c24-921a-1bfc1bc7020e" />
-
-
+Using both pattern matching and supporting context provides stronger classification than relying on the identifier format alone.
 
 ## DLP Integration
 
-The custom SIT is used by the **Block BCSI External Sharing** DLP policy.
+The custom SIT was connected to the **Block BCSI External Sharing** DLP policy.
 
-The policy is designed to identify BCSI content being transmitted to recipients outside the organization and apply protective controls including:
+Testing demonstrated:
 
-- External sharing restriction
-- User notification and policy tips
-- Administrative alert generation
+**Custom BCSI SIT → DLP Detection → External Sharing Attempt → Message Blocked → Defender XDR Alert → Azure Event Hubs → Splunk**
 
-This creates an end-to-end security workflow:
+This allowed the custom classification to drive both preventative controls and downstream security monitoring.
+<img width="637" height="731" alt="image" src="https://github.com/user-attachments/assets/9b880b38-6348-4c24-921a-1bfc1bc7020e" />
+## Key Takeaway
 
-**Custom SIT → BCSI Detection → DLP Policy → External Sharing Control → Defender Alert → Azure Event Hub → Splunk**
+Custom Sensitive Information Types allow Microsoft Purview to identify organization-specific information that may not be covered by built-in classifiers.
 
----
+Adding contextual evidence to regex-based detection can also improve classification confidence and help reduce false positives.
 
+## Disclaimer
+
+The BCSI identifier, detection pattern, keywords, and associated test data used in this project are fictional and were created solely for lab testing.
+
+This is a NERC CIP-inspired information-protection scenario and does not represent or claim compliance with a specific NERC CIP requirement.
