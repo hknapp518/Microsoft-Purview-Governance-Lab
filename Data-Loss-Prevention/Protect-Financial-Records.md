@@ -2,53 +2,45 @@
 
 ## Overview
 
-The **Protect Financial Records** Data Loss Prevention (DLP) policy helps prevent the unauthorized external sharing of sensitive financial information across Microsoft 365 services. This policy detects built-in financial sensitive information types and automatically restricts external access to reduce the risk of payroll, banking, and financial data exposure.
+This DLP policy demonstrates how Microsoft Purview can detect and protect sensitive financial information across Microsoft 365.
 
----
-
-## Business Scenario
-
-Following a data governance assessment at **Knapp Healthcare**, it was determined that financial records, including payroll information and banking data, required additional protection from accidental or unauthorized external sharing.
-
-To reduce organizational risk and support financial data protection requirements, a DLP policy was implemented to detect financial information and prevent it from being shared outside the organization.
-
----
+The scenario uses fictional financial data in a controlled lab environment.
 
 ## Policy Configuration
 
-| Setting | Value |
-|---------|-------|
+| Setting | Configuration |
+| --- | --- |
 | Policy Name | Protect Financial Records |
-| Priority | 2 |
-| Locations | Exchange Online, SharePoint Online, OneDrive |
 | Detection Method | Sensitive Information Types |
-| Mode | Simulation with Notifications |
+| Data Type | Financial information |
+| Locations | Exchange Online, SharePoint Online, OneDrive |
+| User Notifications | Enabled |
 
-### Sensitive Information Types
+## Policy Logic
 
-- Credit Card Number
-- International Banking Account Number (IBAN)
-- SWIFT Code (Bank Identifier Code)
-- U.S. Bank Account Number
+The policy evaluates content for sensitive financial information and applies the configured DLP controls when a match occurs.
 
-All sensitive information types were configured using **High Confidence** detection with an instance count of **1 or more**.
+When the policy conditions are met, Purview can:
 
----
+- Detect sensitive financial information
+- Generate DLP activity for review
+- Notify users when applicable
+- Apply configured protection controls
 
-## Enforcement Actions
+## Validation
 
-When financial information is detected and shared externally, the policy:
+The policy was tested using fictional financial information to validate that Microsoft Purview could identify the sensitive data and trigger the associated DLP rule.
 
-- Restricts external access to protected content
-- Blocks sharing with users outside the organization
-- Displays policy tips to end users
-- Sends incident reports to administrators
-- Generates audit events for monitoring and investigation
+**Financial Data → Sensitive Information Detection → DLP Match → Protection**
+
+## Key Takeaway
+
+Built-in Sensitive Information Types provide a way to identify common financial data without requiring a custom classifier for every data type.
+
+## Disclaimer
+
+All financial information, users, and organizations used in this scenario are fictional and were created solely for lab testing.
 
 ---
 <img width="531" height="697" alt="image" src="https://github.com/user-attachments/assets/0534c26f-bb23-4b53-a71d-ae7d1c9d9ca9" />
 <img width="1287" height="730" alt="image" src="https://github.com/user-attachments/assets/40600d11-088a-4718-abd6-b5956c3f4145" />
-
-## Business Value
-
-This policy strengthens the organization's financial data protection strategy by reducing the likelihood of accidental disclosure of payroll, banking, and payment-related information. By leveraging Microsoft Purview's built-in Sensitive Information Types, the organization can automatically identify and protect regulated financial data while maintaining visibility into policy activity and compliance.
