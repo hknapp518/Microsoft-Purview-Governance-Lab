@@ -2,44 +2,48 @@
 
 ## Overview
 
-To protect payment card information and support PCI DSS compliance, a Microsoft Purview Data Loss Prevention (DLP) policy was implemented to prevent externally sharing content classified as **Highly Confidential – PCI Data**.
+This DLP policy demonstrates how Microsoft Purview can protect payment card information from unauthorized external sharing.
 
-The policy applies across Exchange Online, SharePoint Online, and OneDrive to reduce the risk of unauthorized disclosure of sensitive financial information.
-
----
+The scenario uses fictional payment card data in a controlled Microsoft 365 lab environment.
 
 ## Policy Configuration
 
-**Policy Name**
+| Setting | Configuration |
+| --- | --- |
+| Policy Name | Block PCI External Sharing |
+| Data Type | Payment Card Information |
+| Location | Exchange Online |
+| Sharing Condition | Recipient outside the organization |
+| User Notifications | Enabled |
+| Initial Deployment | Simulation |
 
-Block PCI External Sharing
+## Policy Logic
 
-**Protected Label**
-
-Highly Confidential – PCI Data
-
-**Protected Locations**
-
-- Exchange Online
-- SharePoint Online
-- OneDrive
-
-**Policy Mode**
-
-Enabled
-
----
-
-## Enforcement Actions
-
-When content labeled **Highly Confidential – PCI Data** is detected, the policy:
-
-- Blocks external sharing.
-- Displays policy tips to educate users.
-- Sends administrator alerts.
-- Generates incident reports for security monitoring.
-
+The policy evaluates outbound content for payment card information and external-sharing activity.
 <img width="1330" height="727" alt="image" src="https://github.com/user-attachments/assets/186104ec-5ba1-4825-9687-6c5c3745b4c1" />
+When the conditions are met, the policy can:
+
+- Detect payment card information
+- Identify external-sharing attempts
+- Notify the user
+- Generate DLP activity for review
+- Restrict external sharing when enforcement is enabled
+
+## Testing
+
+The policy was tested using fictional payment card data sent to an external test account.
+
+Simulation was used to validate detection and policy behavior before enforcement.
+
+**PCI Detection → External Sharing Condition → DLP Match → User Notification → Security Monitoring**
+
+## Key Takeaway
+
+This test demonstrated how Microsoft Purview DLP can combine sensitive-data detection with sharing context to protect payment card information while allowing policies to be validated before enforcement.
+
+## Disclaimer
+
+All payment card information, users, recipients, and organizations used in this scenario are fictional and were created solely for lab testing.
 
 
 ---
