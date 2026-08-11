@@ -2,13 +2,13 @@
 
 ## Overview
 
-An enterprise style Microsoft Purview lab demonstrating how sensitive data can be identified, protected, monitored, and investigated across Microsoft 365 and Splunk.
+A Microsoft Purview project demonstrating how sensitive data can be identified, protected, monitored, and investigated across Microsoft 365 and Splunk.
 
 The project uses fictional healthcare and critical-infrastructure scenarios to build and validate data protection controls from classification through SIEM monitoring.
 
 ## Architecture
 
-**Sensitive Data → Microsoft Purview → DLP Enforcement → Microsoft Defender XDR → Azure Event Hub → Splunk**
+**Sensitive Data → Microsoft Purview → DLP Enforcement → Microsoft Defender XDR → Azure Event Hubs → Splunk**
 
 ## What I Built
 
@@ -40,13 +40,13 @@ The classifier was connected to a DLP policy designed to prevent BCSI from being
 
 The final test successfully demonstrated:
 
-**Custom BCSI SIT → High-Confidence Detection → External Sharing Attempt → Message Blocked → Defender Alert → Azure Event Hub → Splunk**
+**Custom BCSI SIT → High-Confidence Detection → External Sharing Attempt → Message Blocked → Defender Alert → Azure Event Hubs → Splunk**
 
 This demonstrates how organization-specific data classification can be connected to prevention and downstream SOC monitoring.
 
 ## Technologies
 
-`Microsoft Purview` · `Defender XDR` · `Microsoft 365` · `Entra ID` · `Azure Event Hubs` · `Splunk Enterprise` · `KQL` · `SPL` · `Regex`
+`Microsoft Purview` · `Defender XDR` · `Microsoft 365` · `Azure Event Hubs` · `Splunk Enterprise` · `KQL` · `SPL` · `Regex`
 
 ## Repository
 
