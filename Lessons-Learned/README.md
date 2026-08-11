@@ -1,124 +1,58 @@
 # Lessons Learned
 
-This project provided experience designing, testing, troubleshooting, and monitoring Microsoft Purview data protection controls in a Microsoft 365 lab environment.
+Building this lab reinforced that effective data protection requires more than creating a DLP policy. Classification, testing, enforcement, troubleshooting, and security monitoring all need to work together.
 
-Rather than focusing only on successful configurations, several of the most valuable lessons came from troubleshooting unexpected behavior and validating how different Microsoft security services interact.
+## Classification Drives Everything
 
-## 1. Start With Classification
+DLP is only as effective as the classification behind it.
 
-Effective DLP depends on accurately identifying the data that needs protection.
+Built-in Sensitive Information Types provide broad coverage, while custom SITs can identify organization-specific data using regex, contextual evidence, confidence levels, and proximity.
 
-Built-in Sensitive Information Types provide broad coverage, but custom Sensitive Information Types allow organizations to detect data that is specific to their environment.
+Testing the classifier independently before connecting it to DLP made troubleshooting much easier and helped reduce false positives.
 
-During this project, I created custom SITs using regular expressions, supporting keywords, confidence levels, and character proximity.
+## Test Before Enforcing
 
-One important lesson was that matching a pattern alone is not always enough. Adding contextual evidence can significantly improve detection quality and reduce false positives.
+Simulation mode was valuable for validating detection logic, policy scope, external-sharing conditions, notifications, and expected behavior before enabling enforcement.
 
-## 2. Simulation Before Enforcement
+This also highlighted the importance of continuous tuning. A technically correct policy can still create problems if it generates excessive alerts or interferes with legitimate workflows.
 
-Testing DLP policies in simulation mode was valuable before enabling enforcement.
+**Simulate → Validate → Tune → Enforce**
 
-Simulation allowed me to validate:
+## Account for Policy Propagation
 
-- Sensitive information detection
-- External sharing conditions
-- Policy matches
-- User notifications
-- Expected policy behavior
+Purview policy changes are not always immediate.
 
-Once the detection logic was validated, the policy could be moved into enforcement with greater confidence.
+During testing, propagation delays sometimes appeared to be configuration failures. Before changing a policy, I learned to verify deployment and synchronization status first.
 
-This reinforced the importance of testing security controls before introducing changes that could affect users or business processes.
+A reliable troubleshooting sequence became:
 
-## 3. Policy Propagation Matters
+1. Confirm policy status and synchronization.
+2. Test the Sensitive Information Type independently.
+3. Validate the test data and detection criteria.
+4. Verify policy scope, conditions, and actions.
+5. Review Purview and Defender activity.
+6. Confirm downstream telemetry.
 
-Microsoft Purview policy changes are not always immediate.
+## Connect Data Protection to Security Operations
 
-During testing, I initially expected newly created or modified policies to begin enforcing controls immediately. In several cases, the policy was still synchronizing across Microsoft 365.
+Blocking sensitive data is only part of the process. The resulting security activity also needs to reach the analysts responsible for investigation.
 
-This created results that initially appeared to be configuration problems.
+In this lab, DLP alerts were validated in Microsoft Defender XDR, streamed through Azure Event Hubs, and ingested into Splunk.
 
-The lesson was simple but important:
+**Data Classification → DLP Enforcement → Defender XDR → Azure Event Hubs → Splunk**
 
-**Validate policy deployment and synchronization status before troubleshooting deeper technical issues.**
-
-This prevents unnecessary configuration changes and helps isolate the actual cause of unexpected behavior.
-
-## 4. DLP Requires Continuous Tuning
-
-A DLP policy should not be treated as a one-time configuration.
-
-Policies need to be monitored and adjusted based on:
-
-- False positives
-- False negatives
-- Business workflows
-- User impact
-- Sensitive information confidence levels
-- Alert volume
-
-A technically correct policy can still create operational problems if it generates excessive alerts or interrupts legitimate business activity.
-
-Effective DLP requires balancing security with usability.
-
-## 5. User Communication Is Part of Data Protection
-
-Technical controls alone are not enough.
-
-Policy tips and user notifications provide an opportunity to explain why an action is being blocked and help users understand how sensitive information should be handled.
-
-Clear notifications can turn a blocked action into a security awareness opportunity rather than simply creating frustration for the user.
-
-## 6. Alerts Are More Valuable When Integrated With Security Operations
-
-Purview provides visibility into data security events, but integrating those events with a SIEM provides additional operational value.
-
-In this lab, Microsoft Defender security telemetry was streamed through Azure Event Hub and ingested into Splunk.
-
-This allowed DLP events to become part of the broader security monitoring workflow rather than remaining isolated within the Microsoft Purview portal.
-
-The resulting architecture demonstrated:
-
-**Data Classification → DLP Enforcement → Defender Alert → Azure Event Hub → Splunk**
-
-## 7. Custom Classification Can Support Industry-Specific Use Cases
-
-The BCSI use case demonstrated how Microsoft Purview can be extended to detect organization-specific sensitive information.
-
-A fictional BES Cyber System Information identifier was created using a custom regex pattern and supporting contextual keywords.
-
-That classifier was then connected to a DLP policy designed to prevent external sharing.
-
-The final test successfully demonstrated:
-
-**Custom BCSI SIT → High-Confidence Detection → External Sharing Attempt → DLP Block → Defender Alert → Splunk**
-
-This reinforced how Purview can be adapted to support information protection scenarios relevant to regulated and critical infrastructure environments.
-
-> The BCSI identifier and test data used in this project are fictional lab examples and should not be interpreted as implementing or satisfying a specific NERC CIP compliance requirement.
-
-## 8. Troubleshooting Should Be Methodical
-
-One of the biggest takeaways from the project was the importance of validating assumptions before making configuration changes.
-
-When something did not work as expected, the most effective troubleshooting process was:
-
-1. Confirm the policy is enabled and synchronized.
-2. Validate the Sensitive Information Type independently.
-3. Confirm the test data actually meets the detection criteria.
-4. Verify policy scope and conditions.
-5. Check user notifications and enforcement actions.
-6. Review Purview and Defender activity.
-7. Validate downstream telemetry in Splunk.
-
-This approach helped distinguish configuration problems from propagation delays and expected platform behavior.
+The BCSI scenario brought these pieces together by using a custom classifier to identify fictional organization-specific information, prevent external sharing, generate an alert, and validate the resulting telemetry in the SIEM.
 
 ## Final Takeaway
 
-The biggest lesson from this project is that data protection is not a single security control.
+The biggest lesson was to treat data protection as a lifecycle rather than a single control:
 
-Effective information protection requires multiple layers working together:
+**Identify → Classify → Protect → Monitor → Investigate → Tune**
 
-**Identify the data → classify it → apply policy → prevent inappropriate sharing → generate security telemetry → investigate the event.**
+Building each stage separately made it easier to understand where failures occurred and how Microsoft Purview fits into the broader security operations workflow.
 
-Building the complete workflow provided practical experience with both the governance side of Microsoft Purview and the operational security side of Defender, Azure Event Hub, and Splunk.
+## Disclaimer
+
+All organizations, users, identifiers, and sensitive data used in this project are fictional and were created solely for lab testing.
+
+The BCSI scenario is NERC CIP-inspired and does not represent or claim compliance with a specific NERC CIP requirement.
