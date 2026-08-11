@@ -2,64 +2,43 @@
 
 ## Overview
 
-Microsoft Purview Data Loss Prevention (DLP) helps organizations identify, monitor, and protect sensitive information across Microsoft 365 services. By combining sensitivity labels with built-in Sensitive Information Types (SITs), organizations can prevent unauthorized sharing of regulated data while supporting compliance and reducing business risk.
+This section documents the Microsoft Purview DLP policies created and tested throughout the project.
 
-For the Knapp Healthcare engagement, DLP policies were implemented to protect healthcare, payment card, and financial information stored in Exchange Online, SharePoint Online, and OneDrive.
-
----
-
-## Objectives
-
-- Prevent unauthorized external sharing of sensitive data
-- Protect regulated healthcare and financial information
-- Demonstrate both label-based and content-based DLP policies
-- Reduce organizational risk through automated policy enforcement
-- Support HIPAA and PCI DSS compliance requirements
-
----
+The policies demonstrate multiple approaches to protecting sensitive information, including sensitivity labels, built-in Sensitive Information Types, and custom Sensitive Information Types.
 
 ## Policies
 
 | Policy | Detection Method | Purpose |
-|---------|------------------|---------|
-| Block PHI External Sharing | Sensitivity Label | Prevent external sharing of documents classified as Confidential – PHI Data |
-| Block PCI External Sharing | Sensitivity Label | Prevent external sharing of documents classified as Highly Confidential – PCI Data |
-| Protect Financial Records | Sensitive Information Types (SITs) | Detect and protect financial information including credit card numbers, bank accounts, IBANs, and SWIFT codes |
-| Sensitive Information Type | Knapp Clinical Protocol Identifier |The purpose of this policy is to protect Knapp Healthcare's proprietary clinical research protocol identifiers from unauthorized external sharing. The policy uses a Custom Sensitive Information Type to automatically detect protocol IDs and apply Microsoft Purview Data Loss Prevention (DLP) controls.
-<img width="1486" height="476" alt="image" src="https://github.com/user-attachments/assets/17135e08-ac17-4ba7-8ddb-0d13a7e0c1d1" />
+| --- | --- | --- |
+| Block PHI External Sharing | Sensitivity Label | Prevent externally sharing content classified as PHI |
+| Block PCI External Sharing | Sensitivity Label | Prevent externally sharing content classified as PCI |
+| Protect Financial Records | Built-in Sensitive Information Types | Detect and protect financial information |
+| Block Custom Protocol SIT | Custom Sensitive Information Type | Detect fictional clinical research identifiers |
+| Block BCSI External Sharing | Custom Sensitive Information Type | Detect and prevent external sharing of fictional BCSI content |
 
+## Testing Approach
 
----
+Policies were tested using fictional data and controlled external-sharing scenarios.
 
-## Detection Methods
+Testing included:
 
-### Sensitivity Labels
+- Simulation mode
+- Policy match validation
+- User notifications
+- False-positive review
+- Enforcement testing
+- External-sharing blocks
+- Defender XDR alert validation
+- Splunk telemetry validation
 
-The PHI and PCI policies rely on Microsoft Purview Sensitivity Labels applied through the organization's Information Protection strategy. Documents containing regulated healthcare or payment card information inherit protection based on their assigned classification.
+## Featured Test: BCSI External Sharing
 
-### Sensitive Information Types (SITs)
+The final DLP test used a custom Sensitive Information Type designed to identify a fictional BES Cyber System Information (BCSI) identifier.
 
-The Financial Records policy demonstrates content inspection using Microsoft Purview's built-in Sensitive Information Types rather than document labels.
+The policy was first validated in simulation mode before being moved into enforcement.
 
-Configured detections include:
+The enforcement test successfully blocked the external email and generated a Microsoft Defender XDR alert. The resulting security telemetry was then streamed through Azure Event Hubs and validated in Splunk.
 
-- Credit Card Number
-- U.S. Bank Account Number
-- International Bank Account Number (IBAN)
-- SWIFT Code
+**Custom BCSI SIT → DLP Match → External Sharing Blocked → Defender XDR → Azure Event Hubs → Splunk**
 
-This approach enables automatic protection even when documents have not yet been manually or automatically classified.
-
----
-
-## Deployment Approach
-
-New DLP policies were initially deployed in **Simulation with Notifications** mode to validate policy matches, review potential false positives, and ensure legitimate business processes were not disrupted.
-
-Following successful validation, policies can be transitioned to **Enforced** mode as part of a phased production rollout.
-
----
-
-## Business Value
-
-This implementation demonstrates how Microsoft Purview can combine information classification and content inspection to automatically protect sensitive data across Microsoft 365. By leveraging both sensitivity labels and built-in Sensitive Information Types, Knapp Healthcare strengthened governance controls while reducing the risk of accidental disclosure of healthcare, payment card, and financial information.
+> The BCSI scenario uses fictional lab data and is NERC CIP-inspired. It does not represent or claim compliance with a specific NERC CIP requirement.
